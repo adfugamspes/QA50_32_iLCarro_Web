@@ -15,7 +15,7 @@ public class HomePage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
-    @FindBy(xpath = "*//a[@ng-reflect-router-link='login']")
+    @FindBy(xpath = "//a[text()=' Log in ']")
         WebElement btnLogIn;
 
     public void clickBtnLogIn(){

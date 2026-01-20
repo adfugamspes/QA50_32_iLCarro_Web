@@ -7,8 +7,7 @@ import pages.HomePage;
 public class LoginTests extends AppManager {
 
     @Test
-    public void loginPositiveTest () {
-        System.out.println("firstTest");
+    public void loginPositiveTest (){
         HomePage homePage = new HomePage(getDriver());
         homePage.clickBtnLogIn();
     }
