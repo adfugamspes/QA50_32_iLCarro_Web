@@ -8,7 +8,7 @@ import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import static pages.BasePage.setDriver;
 
-public class HomePage {
+public class HomePage extends BasePage{
     public HomePage (WebDriver driver) {
         setDriver(driver);
         driver.get("https://ilcarro.web.app/search");

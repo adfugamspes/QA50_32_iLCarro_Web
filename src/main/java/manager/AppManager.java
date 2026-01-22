@@ -14,6 +14,10 @@ public class AppManager {
         return driver;
     }
 
+    public WebDriver setDriver(WebDriver wd){
+        return driver = wd;
+    }
+
     @BeforeMethod
     public void setup() {
         driver = new ChromeDriver();
