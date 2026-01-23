@@ -30,7 +30,8 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//button[text()='Y’alla!']")
     WebElement btnYallaReg;
 
-    @FindBy(xpath = "//input[@type='checkbox']")
+//    @FindBy(xpath = "//input[@type='checkbox']")
+    @FindBy(xpath = "//label[@for='terms-of-use']")
     WebElement checkBoxRegistration;
 
     @FindBy(xpath = "//h1[text()='Registered']")
@@ -44,8 +45,9 @@ public class RegistrationPage extends BasePage{
     }
 
     public void clickCheckBoxRegistration(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", checkBoxRegistration);
+        checkBoxRegistration.click();
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("arguments[0].click();", checkBoxRegistration);
     }
 
     public void clickBtnYallaReg(){
@@ -54,5 +56,13 @@ public class RegistrationPage extends BasePage{
 
     public boolean isPopUpRegistrationDisplayed(){
         return isElementDisplayed(popUpSuccessfulRegistration);
+    }
+
+    public void clickCheckBoxRegistrationWithActions(){
+        int y = checkBoxRegistration.getSize().getHeight();
+        int x = checkBoxRegistration.getSize().getWidth();
+        System.out.println(x + "x" + y + "y");
+        Actions actions = new Actions(driver);
+        actions.moveToElement().click().perform();
     }
 }
