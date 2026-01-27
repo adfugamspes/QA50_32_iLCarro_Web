@@ -59,10 +59,10 @@ public class RegistrationPage extends BasePage{
     }
 
     public void clickCheckBoxRegistrationWithActions(){
-//        int y = checkBoxRegistration.getSize().getHeight();
-//        int x = checkBoxRegistration.getSize().getWidth();
-//        System.out.println(x + "x" + y + "y");
+        int y = checkBoxRegistration.getSize().getHeight();
+        int x = checkBoxRegistration.getSize().getWidth();
+        System.out.println(x + "x" + y + "y");
         Actions actions = new Actions(driver);
-        actions.moveToElement(checkBoxRegistration, 8, 9).click().perform();
+        actions.moveToElement(checkBoxRegistration, -x/2, -y/2).click().perform();
     }
 }
