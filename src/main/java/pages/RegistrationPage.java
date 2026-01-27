@@ -45,9 +45,9 @@ public class RegistrationPage extends BasePage{
     }
 
     public void clickCheckBoxRegistration(){
-        checkBoxRegistration.click();
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("arguments[0].click();", checkBoxRegistration);
+//        checkBoxRegistration.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", checkBoxRegistration);
     }
 
     public void clickBtnYallaReg(){
@@ -59,10 +59,10 @@ public class RegistrationPage extends BasePage{
     }
 
     public void clickCheckBoxRegistrationWithActions(){
-        int y = checkBoxRegistration.getSize().getHeight();
-        int x = checkBoxRegistration.getSize().getWidth();
-        System.out.println(x + "x" + y + "y");
+//        int y = checkBoxRegistration.getSize().getHeight();
+//        int x = checkBoxRegistration.getSize().getWidth();
+//        System.out.println(x + "x" + y + "y");
         Actions actions = new Actions(driver);
-        actions.moveToElement().click().perform();
+        actions.moveToElement(checkBoxRegistration, 8, 9).click().perform();
     }
 }

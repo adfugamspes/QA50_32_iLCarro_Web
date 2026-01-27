@@ -30,10 +30,12 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationPositiveTest() {
+    public void registrationPositiveTestWithActions() {
         int i = new Random().nextInt(10000);
         User user = User.builder().firstName("John").lastName("Snow").email("snow"+ i + "@gmail.com").password("Password!123").build();
         registrationPage.typeRegistrationForm(user);
-        registrationPage.clickCheckBoxRegistration();
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        registrationPage.clickBtnYallaReg();
+        Assert.assertTrue(registrationPage.isPopUpRegistrationDisplayed());
     }
 }
