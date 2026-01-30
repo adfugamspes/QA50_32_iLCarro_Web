@@ -15,8 +15,15 @@ public class PopUpPage extends BasePage {
     @FindBy (xpath = "//mat-dialog-container//h2")
     WebElement popUpMessage;
 
+    @FindBy(xpath = "//button[@class='positive-button ng-star-inserted']")
+    WebElement btnOk;
+
     public boolean isTextInPopUpMessagePresent(String text){
         return isTextInElementPresentWait(popUpMessage, text);
+    }
+
+    public void clickBtnOk(){
+        btnOk.click();
     }
 
 }

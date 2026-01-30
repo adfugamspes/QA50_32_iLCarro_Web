@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.testng.annotations.Test;
 
 public class RegistrationPage extends BasePage{
     public RegistrationPage (WebDriver driver) {
@@ -37,6 +38,12 @@ public class RegistrationPage extends BasePage{
     @FindBy(xpath = "//h1[text()='Registered']")
     WebElement popUpSuccessfulRegistration;
 
+    @FindBy (xpath = "//*[text()=' Logout ']")
+    WebElement btnLogout;
+
+//    @FindBy(xpath = )
+//    WebElement
+
     public void typeRegistrationForm(User user){
         inputFirstName.sendKeys(user.getFirstName());
         inputSecondName.sendKeys(user.getLastName());
@@ -65,4 +72,9 @@ public class RegistrationPage extends BasePage{
         Actions actions = new Actions(driver);
         actions.moveToElement(checkBoxRegistration, -x/2, -y/2).click().perform();
     }
+
+    public void clickBtnLogout(){
+        btnLogout.click();
+    }
+
 }
