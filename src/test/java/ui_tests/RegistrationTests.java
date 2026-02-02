@@ -30,7 +30,7 @@ public class RegistrationTests extends AppManager {
         User user = User.builder().firstName("John").lastName("Smith").
                 email(registrationPage.randomEmailGenerator()).password("Password123!").build();
         registrationPage.typeRegistrationForm(user);
-        registrationPage.clickCheckBoxRegistration();
+        registrationPage.clickCheckBoxRegistration_WithJS();
         registrationPage.clickBtnYallaReg();
         Assert.assertTrue(registrationPage.isPopUpRegistrationDisplayed());
     }
@@ -48,17 +48,16 @@ public class RegistrationTests extends AppManager {
 
     @Test
     public void registrationPositiveTest_WithFaker() {
-        User user = positiveRegUser();
+        User user = positiveUserRegistration();
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
         registrationPage.clickBtnYallaReg();
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    //CW7
     @Test
     public void registrationNegativeTest_UserAlreadyExists() {
-        User user = User.builder().firstName("Marry").lastName("Brown").email(registrationPage.randomEmailGenerator()).password("Password!123").build();
+        User user = positiveUserRegistration();
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
         registrationPage.clickBtnYallaReg();
@@ -74,7 +73,7 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationNegativeTest_WithSpaceInFirstName_BUG() {
+    public void registrationNegativeTest_SpaceInFirstNameField_BUG() {
         User user = User.builder().firstName(" ").lastName("Brown").email(registrationPage.randomEmailGenerator()).password("Password!123").build();
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();

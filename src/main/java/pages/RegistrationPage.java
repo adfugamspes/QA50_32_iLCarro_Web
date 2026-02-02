@@ -8,7 +8,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.testng.annotations.Test;
 
 public class RegistrationPage extends BasePage{
     public RegistrationPage (WebDriver driver) {
@@ -48,7 +47,7 @@ public class RegistrationPage extends BasePage{
         inputPasswordReg.sendKeys(user.getPassword());
     }
 
-    public void clickCheckBoxRegistration(){
+    public void clickCheckBoxRegistration_WithJS(){
 //        checkBoxRegistration.click();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", checkBoxRegistration);

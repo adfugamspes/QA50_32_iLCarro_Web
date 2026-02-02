@@ -6,7 +6,7 @@ import net.datafaker.Faker;
 public class UserFactory {
     static Faker faker = new Faker();
 
-    public static User positiveRegUser(){
+    public static User positiveUserRegistration(){
         User user = User.builder()
                 .firstName(faker.name().firstName())
                 .lastName(faker.name().lastName())
@@ -15,7 +15,7 @@ public class UserFactory {
         return user;
     }
 
-    public static User positiveLogUser(){
+    public static User positiveUserLogin(){
         User user = User.builder().email("correctmail123@mail.com")
                 .password("Password!123").build();
         return user;
