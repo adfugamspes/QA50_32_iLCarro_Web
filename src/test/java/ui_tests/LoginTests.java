@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
-import pages.RegistrationPage;
 import org.testng.asserts.SoftAssert;
 
 public class LoginTests extends AppManager {
@@ -32,7 +31,7 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void loginPositiveTestWithPopUpPage (){
+    public void loginPositiveTest_WithPopUpPage (){
         User user = User.builder().email("correctmail123@mail.com").password("Password123!").build();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
@@ -50,12 +49,11 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void loginNegativeTest_InvalidData(){
+    public void loginNegativeTest_InvalidEmailAndBlankPassword(){
         User user = User.builder().email("correctmail123mail.com").password("").build();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
-
         softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"), "valid email field");
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "valid password field");
         softAssert.assertAll();

@@ -26,7 +26,7 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationPositiveTestWithUser() {
+    public void registrationPositiveTest_WithUser() {
         User user = User.builder().firstName("John").lastName("Smith").
                 email(registrationPage.randomEmailGenerator()).password("Password123!").build();
         registrationPage.typeRegistrationForm(user);
@@ -36,7 +36,7 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationPositiveTestWithActions() {
+    public void registrationPositiveTest_WithActions() {
         int i = new Random().nextInt(10000);
         User user = User.builder().firstName("John").lastName("Snow").email("snow" + i + "@gmail.com").password("Password!123").build();
         registrationPage.typeRegistrationForm(user);
@@ -47,8 +47,8 @@ public class RegistrationTests extends AppManager {
     }
 
     @Test
-    public void registrationPositiveTestWithFaker() {
-        User user = positiveUser();
+    public void registrationPositiveTest_WithFaker() {
+        User user = positiveRegUser();
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
         registrationPage.clickBtnYallaReg();

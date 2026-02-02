@@ -24,7 +24,7 @@ public class LoginPage extends BasePage{
     WebElement inputPassword;
 
     @FindBy(xpath = "//button[text()='Y’alla!']")
-    WebElement btnYalla;
+    WebElement btnYallaLog;
 
     @FindBy(xpath = "//h2[text()='Logged in success']")
     WebElement popUpSuccessfulLogin;
@@ -35,7 +35,7 @@ public class LoginPage extends BasePage{
     }
 
     public void clickBtnYalla(){
-        btnYalla.click();
+        btnYallaLog.click();
     }
 
     public boolean isLoggedInDisplayed(){

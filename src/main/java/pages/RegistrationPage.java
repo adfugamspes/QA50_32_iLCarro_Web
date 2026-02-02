@@ -41,9 +41,6 @@ public class RegistrationPage extends BasePage{
     @FindBy (xpath = "//*[text()=' Logout ']")
     WebElement btnLogout;
 
-//    @FindBy(xpath = )
-//    WebElement
-
     public void typeRegistrationForm(User user){
         inputFirstName.sendKeys(user.getFirstName());
         inputSecondName.sendKeys(user.getLastName());
@@ -68,7 +65,7 @@ public class RegistrationPage extends BasePage{
     public void clickCheckBoxRegistrationWithActions(){
         int y = checkBoxRegistration.getSize().getHeight();
         int x = checkBoxRegistration.getSize().getWidth();
-        System.out.println(x + "x" + y + "y");
+//        System.out.println(x + "x" + y + "y");
         Actions actions = new Actions(driver);
         actions.moveToElement(checkBoxRegistration, -x/2, -y/2).click().perform();
     }
