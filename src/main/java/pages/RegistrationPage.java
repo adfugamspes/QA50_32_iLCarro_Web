@@ -73,4 +73,8 @@ public class RegistrationPage extends BasePage{
         btnLogout.click();
     }
 
+    public boolean isBtnYallaRegEnabled(){
+       return btnYallaReg.isEnabled();
+    }
+
 }

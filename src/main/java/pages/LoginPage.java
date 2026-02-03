@@ -41,4 +41,8 @@ public class LoginPage extends BasePage{
     public boolean isLoggedInDisplayed(){
         return isElementDisplayed(popUpSuccessfulLogin);
     }
+
+    public boolean isBtnYallaLogEnabled(){
+        return btnYallaLog.isEnabled();
+    }
 }

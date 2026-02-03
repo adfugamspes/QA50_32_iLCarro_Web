@@ -9,6 +9,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
 import org.testng.asserts.SoftAssert;
+import static utils.UserFactory.*;
 
 public class LoginTests extends AppManager {
 
@@ -58,5 +59,101 @@ public class LoginTests extends AppManager {
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "valid password field");
         softAssert.assertAll();
     }
+
+    //===========================HW7==============================
+
+    @Test
+    public void loginNegativeTest_AllFieldsBlank(){
+        User user = User.builder().email("").password("").build();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_BlankEmail(){
+        User user = positiveUserLogin();
+        user.setEmail("");
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_SpaceInEmail(){
+        User user = positiveUserLogin();
+        user.setEmail(" ");
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_BlankPassword(){
+        User user = positiveUserLogin();
+        user.setPassword("");
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_SpaceInPassword(){
+        User user = positiveUserLogin();
+        user.setPassword(" ");
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertTrue(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"), "wrong message");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_WrongEmail(){
+        User user = positiveUserLogin();
+        user.setEmail("testingmail@gmail.com");
+        loginPage.typeLoginForm(user);
+        softAssert.assertTrue(loginPage.isBtnYallaLogEnabled());
+        loginPage.clickBtnYalla();
+        softAssert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginNegativeTest_WrongPassword(){
+        User user = positiveUserLogin();
+        user.setPassword("Qwerty^123");
+        loginPage.typeLoginForm(user);
+        softAssert.assertTrue(loginPage.isBtnYallaLogEnabled());
+        loginPage.clickBtnYalla();
+        softAssert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
+        softAssert.assertAll();
+    }
+
+
+    @Test
+    public void loginNegativeTest_EmailWithSpace(){
+        User user = positiveUserLogin();
+        user.setEmail("correct mail123@mail.com");
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"));
+        softAssert.assertAll();
+    }
+
+
+
+
+
 
 }

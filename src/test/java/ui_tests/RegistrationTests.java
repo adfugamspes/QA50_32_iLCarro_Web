@@ -93,4 +93,282 @@ public class RegistrationTests extends AppManager {
         softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"), "validate error message for Password field");
         softAssert.assertAll();
     }
+
+
+    //===========================HW7==============================
+
+    @Test
+    public void registrationNegativeTest_WOCheckBox(){
+        User user = positiveUserRegistration();
+        registrationPage.typeRegistrationForm(user);
+        Assert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+    }
+
+    @Test
+    public void registrationNegativeTest_BlankFirstName(){
+        User user = positiveUserRegistration();
+        user.setFirstName("");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Name is required"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_SpaceInFirstName(){
+        User user = positiveUserRegistration();
+        user.setFirstName(" ");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isBtnYallaRegEnabled());
+        registrationPage.clickBtnYallaReg();
+        softAssert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("must not be blank"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_BlankLastName(){
+        User user = positiveUserRegistration();
+        user.setLastName("");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Last name is required"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_SpaceInLastName(){
+        User user = positiveUserRegistration();
+        user.setLastName(" ");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isBtnYallaRegEnabled());
+        registrationPage.clickBtnYallaReg();
+        softAssert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("must not be blank"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_BlankEmail(){
+        User user = positiveUserRegistration();
+        user.setEmail("");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_SpaceInEmail(){
+        User user = positiveUserRegistration();
+        user.setEmail(" ");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_BlankPassword(){
+        User user = positiveUserRegistration();
+        user.setPassword("");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_SpaceInPassword(){
+        User user = positiveUserRegistration();
+        user.setPassword(" ");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_PasswordWOUpperCase(){
+        User user = positiveUserRegistration();
+        user.setPassword("qwerty^35");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_PasswordWOLowerCase(){
+        User user = positiveUserRegistration();
+        user.setPassword("QWERTY^35");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_PasswordWODigits(){
+        User user = positiveUserRegistration();
+        user.setPassword("Qwerty^ok");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_PasswordWOSpecialChar(){
+        User user = positiveUserRegistration();
+        user.setPassword("Qwerty.35");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_Password7Symbols(){
+        User user = positiveUserRegistration();
+        user.setPassword("Qrty^35");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWOAtSymbol(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123gmail.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailDoubleAtSymbol(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail@@123gmail.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWODot(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123@gmailcom");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWithDoubleDot(){
+        User user = positiveUserRegistration();
+        user.setEmail("testing..mail123@gmail.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWOLettersAfterAtSymbol(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123@");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWOLettersBeforeAtSymbol(){
+        User user = positiveUserRegistration();
+        user.setEmail("@gmailcom");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailDoubleDotInDomain(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123@gmail..com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWOLocalDomain(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123@.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWOTopDomain(){
+        User user = positiveUserRegistration();
+        user.setEmail("testingmail123@gmail");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWithSpecialChar_BUG(){
+        User user = positiveUserRegistration();
+        user.setEmail("testing$mail123@gmail.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void registrationNegativeTest_EmailWithSpace(){
+        User user = positiveUserRegistration();
+        user.setEmail("testing mail123@gmail.com");
+        registrationPage.typeRegistrationForm(user);
+        registrationPage.clickCheckBoxRegistrationWithActions();
+        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
+        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
+        softAssert.assertAll();
+    }
+
+
 }
