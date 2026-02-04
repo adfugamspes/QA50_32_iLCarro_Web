@@ -9,6 +9,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
 import org.testng.asserts.SoftAssert;
+import utils.RetryAnalyzer;
+
 import static utils.UserFactory.*;
 
 public class LoginTests extends AppManager {
@@ -140,7 +142,7 @@ public class LoginTests extends AppManager {
     }
 
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void loginNegativeTest_EmailWithSpace(){
         User user = positiveUserLogin();
         user.setEmail("correct mail123@mail.com");
@@ -151,6 +153,15 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
+    //==============================HW8===========================
+
+    @Test(retryAnalyzer = RetryAnalyzer.class)
+    public void loginNegativeTest_WrongTestForRetryAnalyzer(){
+        User user = positiveUserLogin();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertFalse(loginPage.isBtnYallaLogEnabled());
+    }
 
 
 
