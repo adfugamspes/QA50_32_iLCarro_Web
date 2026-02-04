@@ -142,7 +142,7 @@ public class LoginTests extends AppManager {
     }
 
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test()
     public void loginNegativeTest_EmailWithSpace(){
         User user = positiveUserLogin();
         user.setEmail("correct mail123@mail.com");
