@@ -26,7 +26,7 @@ public class LoginTests extends AppManager {
 
     @Test
     public void loginPositiveTestWithUser (){
-        User user = User.builder().email("correctmail123@mail.com").password("Password123!").build();
+        User user = positiveUserLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
@@ -35,7 +35,7 @@ public class LoginTests extends AppManager {
 
     @Test
     public void loginPositiveTest_WithPopUpPage (){
-        User user = User.builder().email("correctmail123@mail.com").password("Password123!").build();
+        User user = positiveUserLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();
@@ -44,7 +44,7 @@ public class LoginTests extends AppManager {
 
     @Test
     public void loginNegativeTest_WrongPassword_WOSpecialChar(){
-        User user = User.builder().email("correctmail123@mail.com").password("Password123").build();
+        User user = positiveUserLogin();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
         loginPage.clickBtnYalla();

@@ -16,8 +16,8 @@ public class UserFactory {
     }
 
     public static User positiveUserLogin(){
-        User user = User.builder().email("correctmail123@mail.com")
-                .password("Password123!").build();
+        User user = User.builder().email(PropertiesReader.getProperty("base.properties", "login)"))
+                .password(PropertiesReader.getProperty("base.properties", "password")).build();
         return user;
     }
 }
