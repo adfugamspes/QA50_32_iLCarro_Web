@@ -11,6 +11,7 @@ import pages.PopUpPage;
 import org.testng.asserts.SoftAssert;
 import utils.RetryAnalyzer;
 
+import static utils.PropertiesReader.*;
 import static utils.UserFactory.*;
 
 public class LoginTests extends AppManager {
@@ -163,8 +164,18 @@ public class LoginTests extends AppManager {
         Assert.assertFalse(loginPage.isBtnYallaLogEnabled());
     }
 
-    //==============================CW9===========================
+    //==============================CW10===========================
 
+    @Test
+    public void loginPositiveTestWith_PropertiesReader (){
+        User user = User.builder()
+                .email(getProperty("base.properties", "login"))
+                .password(getProperty("base.properties", "password")).
+                build();
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(loginPage.isLoggedInDisplayed());
+    }
 
 
 
