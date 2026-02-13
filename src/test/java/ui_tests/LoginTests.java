@@ -11,6 +11,8 @@ import pages.PopUpPage;
 import org.testng.asserts.SoftAssert;
 import utils.RetryAnalyzer;
 
+import java.lang.reflect.Method;
+
 import static utils.PropertiesReader.*;
 import static utils.UserFactory.*;
 
@@ -176,7 +178,14 @@ public class LoginTests extends AppManager {
         loginPage.clickBtnYalla();
         Assert.assertTrue(loginPage.isLoggedInDisplayed());
     }
-
-
+//================================CW11===================
+    @Test
+    public void loginPositiveTest_WithLogger(Method method){
+        User user = positiveUserLogin();
+        logger.info("start test " + method.getName() + "with user " + user);
+        loginPage.typeLoginForm(user);
+        loginPage.clickBtnYalla();
+        Assert.assertTrue(loginPage.isLoggedInDisplayed());
+    }
 
 }
