@@ -2,6 +2,8 @@ package ui_tests;
 
 import dto.User;
 import manager.AppManager;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
@@ -13,13 +15,15 @@ import pages.LoginPage;
 import pages.PopUpPage;
 import utils.enums.HeaderMenuItem;
 
+import java.time.LocalDate;
+
 import static utils.UserFactory.*;
 
 public class SearchCarTests extends AppManager {
     HomePage homePage;
 
     @BeforeMethod
-    public void goToHomePage(){
+    public void openHomePage(){
         homePage = new HomePage(getDriver());
     }
 
@@ -31,4 +35,42 @@ public class SearchCarTests extends AppManager {
        Assert.assertTrue(findCarSearchResults.isTextInSearchResultsMessagePresents("No available cars"));
     }
 
+    //===========================CW12==========================
+    @Test
+    public void searchCarPositiveTest(){
+        String city = "Tel-Aviv";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2026, 4, 21);
+        homePage.typeSearchForm(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isUrlContains("results", 3));
+    }
+
+    @Test(expectedExceptions = org.openqa.selenium.TimeoutException.class)
+    public void searchCarNegativeTest_EmptyFieldCity(){
+        String city = "";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2026, 4, 21);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+    }
+
+    @Test
+    public void searchCarNegativeTest_EmptyFieldCityValidateError(){
+        String city = "";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2026, 4, 21);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
+    }
+
+    @Test
+    public void searchCarPositiveTest_WithDatePicker() {
+        String city = "Tel-Aviv";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2026, 4, 21);
+        homePage.typeSearchFormCalendar(city, startDate, endDate);
+//        homePage.clickBtnYalla();
+//        Assert.assertTrue(homePage.isUrlContains("results", 3));
+    }
 }
