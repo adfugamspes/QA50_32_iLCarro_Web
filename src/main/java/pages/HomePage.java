@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import static pages.BasePage.setDriver;
 import static utils.PropertiesReader.*;
@@ -37,6 +40,7 @@ public class HomePage extends BasePage{
 
     @FindBy(xpath = "//button[@aria-label='Choose month and year']")
     WebElement btnChooseYear;
+
 
     public void clickBtnLogIn(){
         btnLogIn.click();
@@ -78,20 +82,29 @@ public class HomePage extends BasePage{
     }
 
     public void clickBtnYalla(){
+        btnYalla.click();
+    }
+
+    public void clickBtnYalla_WithClickWait(){
         clickWait(btnYalla, 3);
     }
 
     private void typeCalendar(LocalDate date){
-        btnChooseYear.click();
         String year = Integer.toString(date.getYear());
-        WebElement btnYear = driver.findElement(By.xpath("td[@aria-label='"+year+"']"));
+        String month = date.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+        btnChooseYear.click();
+        WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
         btnYear.click();
+        WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+year+"']"));
+        btnMonth.click();
+        WebElement btnDay = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+date.getDayOfMonth()+", "+year+"']"));
+        btnDay.click();
     }
 
-    public void typeSearchFormCalendar(String city, LocalDate startDate, LocalDate endDate){
+    public void typeSearchFormWithCalendar(String city, LocalDate startDate, LocalDate endDate){
         inputCity.sendKeys(city);
         inputDates.click();
         typeCalendar(startDate);
-
+        typeCalendar(endDate);
     }
 }

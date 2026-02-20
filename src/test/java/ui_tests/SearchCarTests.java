@@ -42,7 +42,7 @@ public class SearchCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026, 4, 12);
         LocalDate endDate = LocalDate.of(2026, 4, 21);
         homePage.typeSearchForm(city, startDate, endDate);
-        homePage.clickBtnYalla();
+        homePage.clickBtnYalla_WithClickWait();
         Assert.assertTrue(homePage.isUrlContains("results", 3));
     }
 
@@ -52,7 +52,7 @@ public class SearchCarTests extends AppManager {
         LocalDate startDate = LocalDate.of(2026, 4, 12);
         LocalDate endDate = LocalDate.of(2026, 4, 21);
         homePage.typeSearchFormWOJS(city, startDate, endDate);
-        homePage.clickBtnYalla();
+        homePage.clickBtnYalla_WithClickWait();
     }
 
     @Test
@@ -64,13 +64,64 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("City is required"));
     }
 
+
+    //===============================HW10========================
     @Test
-    public void searchCarPositiveTest_WithDatePicker() {
-        String city = "Tel-Aviv";
+    public void searchCarNegativeTest_SameDate_ValidateError(){
+        String city = "Haifa";
         LocalDate startDate = LocalDate.of(2026, 4, 12);
-        LocalDate endDate = LocalDate.of(2026, 4, 21);
-        homePage.typeSearchFormCalendar(city, startDate, endDate);
-//        homePage.clickBtnYalla();
-//        Assert.assertTrue(homePage.isUrlContains("results", 3));
+        LocalDate endDate = LocalDate.of(2026, 4, 12);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isTextInErrorPresent("You can't book car for less than a day"));
     }
+
+    @Test
+    public void searchCarNegativeTest_WrongDatesOrder_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2026, 4, 1);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"));
+    }
+
+    @Test
+    public void searchCarNegativeTest_PastDates_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.of(2025, 4, 12);
+        LocalDate endDate = LocalDate.of(2025, 4, 22);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date before today"));
+    }
+
+    @Test
+    public void searchCarNegativeTest_LongPeriodSelection_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.of(2026, 4, 12);
+        LocalDate endDate = LocalDate.of(2027, 4, 22);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date after one year"));
+    }
+
+    @Test
+    public void searchCarNegativeTest_WrongMonth_ValidateError(){
+        homePage.typeFindCarForm("Haifa", "13/02/2027 - 12/10/2027");
+        homePage.clickBtnYalla();
+        Assert.assertTrue(homePage.isTextInErrorPresent("Dates are required"));
+    }
+
+    @Test
+    public void searchCarPositiveTest_WithCalendar() {
+        String city = "Tel-Aviv";
+        LocalDate startDate = LocalDate.of(2026, 10, 12);
+        LocalDate endDate = LocalDate.of(2026, 11, 21);
+        homePage.typeSearchFormWithCalendar(city, startDate, endDate);
+        homePage.activateAndClickBtnYalla();
+        Assert.assertTrue(homePage.isUrlContains("results", 3));
+    }
+
+
 }
