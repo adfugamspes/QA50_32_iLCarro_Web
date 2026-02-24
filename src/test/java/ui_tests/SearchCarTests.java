@@ -7,21 +7,25 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.FindCarSearchResults;
 import pages.HomePage;
 import pages.LoginPage;
 import pages.PopUpPage;
+import utils.TestNGListener;
 import utils.enums.HeaderMenuItem;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 import static utils.UserFactory.*;
+@Listeners(TestNGListener.class)
 
 public class SearchCarTests extends AppManager {
     HomePage homePage;
-
+    SoftAssert softAssert = new SoftAssert();
     @BeforeMethod
     public void openHomePage(){
         homePage = new HomePage(getDriver());
@@ -123,5 +127,60 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isUrlContains("results", 3));
     }
 
+    //=============================CW13===========================
+    @Test
+    public void searchCarNegativeTest_SameDateNow_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now();
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        softAssert.assertTrue(homePage.isTextInErrorPresent("You can't book car for less than a day"), "validate field dates error");
+        softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"), "validate field city error");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void searchCarNegativeTest_StartDateBeforeNow_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.now().minusDays(1);
+        LocalDate endDate = LocalDate.now();
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        softAssert.assertTrue(homePage.isTextInErrorPresent("You can't pick date before today"), "validate field dates error");
+        softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"), "validate field city error");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void searchCarNegativeTest_StartDateAfterEndDate_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.now().plusDays(10);
+        LocalDate endDate = LocalDate.now().plusDays(8);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+        softAssert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"), "validate field dates error");
+        softAssert.assertTrue(homePage.isTextInErrorPresent("City is required"), "validate field city error");
+        softAssert.assertAll();
+    }
+
+    @Test(expectedExceptions = java.time.DateTimeException.class)
+    public void searchCarNegativeTest_InvalidDate_ValidateError(){
+        String city = "Haifa";
+        LocalDate startDate = LocalDate.of(2026, 2, 30);
+        LocalDate endDate = LocalDate.of(2026, 4, 12);
+        homePage.typeSearchFormWOJS(city, startDate, endDate);
+        homePage.clickBtnYalla();
+    }
+
+    @Test
+    public void searchCarPositiveTest_WithCalendar_InClass() {
+        String city = "Tel-Aviv";
+        LocalDate startDate = LocalDate.of(2026, 10, 12);
+        LocalDate endDate = LocalDate.of(2026, 11, 21);
+        homePage.typeSearchFormWithCalendar_InClass(city, startDate, endDate);
+        homePage.activateAndClickBtnYalla();
+        Assert.assertTrue(homePage.isUrlContains("results", 5));
+    }
 
 }

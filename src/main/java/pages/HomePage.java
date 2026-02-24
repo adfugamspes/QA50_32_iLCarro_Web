@@ -101,10 +101,39 @@ public class HomePage extends BasePage{
         btnDay.click();
     }
 
+
     public void typeSearchFormWithCalendar(String city, LocalDate startDate, LocalDate endDate){
         inputCity.sendKeys(city);
         inputDates.click();
         typeCalendar(startDate);
         typeCalendar(endDate);
     }
+    //==================================CW13=============================
+
+    private String parseMonth(String month){
+        StringBuilder sb = new StringBuilder();
+        return sb.append(month.substring(0, 1).toUpperCase()).append(month.substring(1).toLowerCase()).toString();
+    }
+
+    public void typeCalendar_InClass(LocalDate date){
+        String year = Integer.toString(date.getYear());
+        btnChooseYear.click();
+        WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
+        btnYear.click();
+        String month = parseMonth(date.getMonth().toString());
+        WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+year+"']"));
+        btnMonth.click();
+//        String day = Integer.toString(date.getDayOfMonth());
+        String day = String.valueOf(date.getDayOfMonth());
+        WebElement btnDay = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+day+", "+year+"']"));
+        btnDay.click();
+    }
+
+    public void typeSearchFormWithCalendar_InClass(String city, LocalDate startDate, LocalDate endDate){
+        inputCity.sendKeys(city);
+        inputDates.click();
+        typeCalendar_InClass(startDate);
+        typeCalendar_InClass(endDate);
+    }
+
 }
