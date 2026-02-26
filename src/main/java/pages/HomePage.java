@@ -110,7 +110,7 @@ public class HomePage extends BasePage{
     }
     //==================================CW13=============================
 
-    private String parseMonth(String month){
+    private String createMonth(String month){
         StringBuilder sb = new StringBuilder();
         return sb.append(month.substring(0, 1).toUpperCase()).append(month.substring(1).toLowerCase()).toString();
     }
@@ -120,7 +120,7 @@ public class HomePage extends BasePage{
         btnChooseYear.click();
         WebElement btnYear = driver.findElement(By.xpath("//td[@aria-label='"+year+"']"));
         btnYear.click();
-        String month = parseMonth(date.getMonth().toString());
+        String month = createMonth(date.getMonth().toString());
         WebElement btnMonth = driver.findElement(By.xpath("//td[@aria-label='"+month+" "+year+"']"));
         btnMonth.click();
 //        String day = Integer.toString(date.getDayOfMonth());
