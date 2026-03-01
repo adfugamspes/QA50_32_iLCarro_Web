@@ -54,7 +54,7 @@ public abstract class BasePage {
         return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
+    public static <T extends BasePage> T clickButtonHeader(HeaderMenuItem item){
         WebElement button = new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(item.getLocator())));
         button.click();
@@ -70,7 +70,7 @@ public abstract class BasePage {
         }
     }
 
-    public void clickWait(WebElement element, int time){
+    public static void clickWait(WebElement element, int time){
         new WebDriverWait(driver, Duration.ofSeconds(time))
                 .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
