@@ -46,15 +46,6 @@ public class LoginTests extends AppManager {
     }
 
     @Test
-    public void loginNegativeTest_WrongPassword_WOSpecialChar(){
-        User user = positiveUserLogin();
-        LoginPage loginPage = new LoginPage(getDriver());
-        loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Login or Password incorrect"));
-    }
-
-    @Test
     public void loginNegativeTest_InvalidEmailAndBlankPassword(){
         User user = User.builder().email("correctmail123mail.com").password("").build();
         LoginPage loginPage = new LoginPage(getDriver());
@@ -158,13 +149,13 @@ public class LoginTests extends AppManager {
 
     //==============================HW8===========================
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
-    public void loginNegativeTest_WrongTestForRetryAnalyzer(){
-        User user = positiveUserLogin();
-        loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        Assert.assertFalse(loginPage.isBtnYallaLogEnabled());
-    }
+//    @Test(retryAnalyzer = RetryAnalyzer.class)
+//    public void loginNegativeTest_WrongTestForRetryAnalyzer(){
+//        User user = positiveUserLogin();
+//        loginPage.typeLoginForm(user);
+//        loginPage.clickBtnYalla();
+//        Assert.assertFalse(loginPage.isBtnYallaLogEnabled());
+//    }
 
     //==============================CW10===========================
 

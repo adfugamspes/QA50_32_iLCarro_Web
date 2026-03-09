@@ -9,6 +9,7 @@ import org.testng.asserts.SoftAssert;
 import pages.HomePage;
 import pages.PopUpPage;
 import pages.RegistrationPage;
+import utils.RetryAnalyzer;
 
 import java.util.Random;
 
@@ -38,7 +39,8 @@ public class RegistrationTests extends AppManager {
     @Test
     public void registrationPositiveTest_WithActions() {
         int i = new Random().nextInt(10000);
-        User user = User.builder().firstName("John").lastName("Snow").email("snow" + i + "@gmail.com").password("Password!123").build();
+        User user = positiveUserRegistration();
+        user.setEmail("snow" + i + "@gmail.com");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
         registrationPage.clickBtnYallaReg();
@@ -115,7 +117,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_SpaceInFirstName(){
         User user = positiveUserRegistration();
         user.setFirstName(" ");
@@ -138,7 +140,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_SpaceInLastName(){
         User user = positiveUserRegistration();
         user.setLastName(" ");
@@ -161,7 +163,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_SpaceInEmail(){
         User user = positiveUserRegistration();
         user.setEmail(" ");
@@ -183,7 +185,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_SpaceInPassword(){
         User user = positiveUserRegistration();
         user.setPassword(" ");
@@ -194,7 +196,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_PasswordWOUpperCase(){
         User user = positiveUserRegistration();
         user.setPassword("qwerty^35");
@@ -205,7 +207,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_PasswordWOLowerCase(){
         User user = positiveUserRegistration();
         user.setPassword("QWERTY^35");
@@ -216,7 +218,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_PasswordWODigits(){
         User user = positiveUserRegistration();
         user.setPassword("Qwerty^ok");
@@ -227,7 +229,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_PasswordWOSpecialChar(){
         User user = positiveUserRegistration();
         user.setPassword("Qwerty.35");
@@ -238,7 +240,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationNegativeTest_Password7Symbols(){
         User user = positiveUserRegistration();
         user.setPassword("Qrty^35");

@@ -7,13 +7,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.enums.FooterMenuItem;
+import utils.enums.HeaderMenuItem;
 
+import java.time.Duration;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-import static pages.BasePage.setDriver;
 import static utils.PropertiesReader.*;
 
 public class HomePage extends BasePage{
@@ -41,13 +44,34 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//button[@aria-label='Choose month and year']")
     WebElement btnChooseYear;
 
+    @FindBy(xpath = "(//a[@class='logo'])[last()]")
+    WebElement logoFooter;
+
+    @FindBy(xpath = "(//a[@href='search'])[last()]")
+    WebElement btnSearchFooter;
+
+    @FindBy(xpath = "(//a[@href='let-car-work'])[last()]")
+    WebElement btnLetTheCarWorkFooter;
+
+    @FindBy(xpath = "(//a[@href='terms-of-use'])[last()]")
+    WebElement btnTermsOfUseFooter;
+
+    @FindBy(xpath = "(//a[@href='registration'])[last()]")
+    WebElement btnRegistrationFooter;
+
+    @FindBy(xpath = "(//a[@href='login'])[last()]")
+    WebElement btnLogInFooter;
+
+    @FindBy(xpath = "//a[@class='telephone']")
+    WebElement btnPhoneFooter;
+
 
     public void clickBtnLogIn(){
         btnLogIn.click();
     }
 
     public void clickBtnSignUp(){
-        btnSignUp.click();
+        clickWait(btnSignUp, 3);
     }
 
     public void activateAndClickBtnYalla(){
@@ -135,5 +159,43 @@ public class HomePage extends BasePage{
         typeCalendar_InClass(startDate);
         typeCalendar_InClass(endDate);
     }
+
+    public boolean clickIconFooter(FooterMenuItem item, String title){
+        driver.findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.titleContains(title));
+
+    }
+
+    public boolean clickIconHeader(HeaderMenuItem item, String title){
+        driver.findElement(By.xpath(item.getLocator())).click();
+        return new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.titleContains(title));
+    }
+
+    public void clickLogoFooter(){
+        logoFooter.click();
+    }
+
+    public void clickBtnSearchFooter(){
+        btnSearchFooter.click();
+    }
+
+    public void clickBtnLetTheCarWorkFooter(){
+        btnLetTheCarWorkFooter.click();
+    }
+
+    public void clickBtnTermsOfUseFooter(){
+        btnTermsOfUseFooter.click();
+    }
+
+    public void clickBtnRegistrationFooter(){
+        btnRegistrationFooter.click();
+    }
+
+    public void clickBtnLogInFooter(){
+        btnLogInFooter.click();
+    }
+
+
+
 
 }

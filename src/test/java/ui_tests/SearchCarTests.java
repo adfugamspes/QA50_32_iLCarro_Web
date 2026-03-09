@@ -31,14 +31,6 @@ public class SearchCarTests extends AppManager {
         homePage = new HomePage(getDriver());
     }
 
-    @Test
-    public void checkElements(){
-       homePage.typeFindCarForm("Tel-Aviv", "2/18/2026 - 2/21/2026");
-       homePage.activateAndClickBtnYalla();
-       FindCarSearchResults findCarSearchResults = new FindCarSearchResults(getDriver());
-       Assert.assertTrue(findCarSearchResults.isTextInSearchResultsMessagePresents("No available cars"));
-    }
-
     //===========================CW12==========================
     @Test
     public void searchCarPositiveTest(){

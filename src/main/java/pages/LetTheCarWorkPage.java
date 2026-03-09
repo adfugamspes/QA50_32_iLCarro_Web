@@ -1,18 +1,17 @@
 package pages;
 
 import dto.Car;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import utils.CarFactory;
+import utils.enums.Fuel;
 
 import java.io.File;
 import java.util.Random;
-
-import static utils.CarFactory.positiveCar;
 
 public class LetTheCarWorkPage extends BasePage {
 
@@ -21,7 +20,7 @@ public class LetTheCarWorkPage extends BasePage {
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
-    @FindBy(xpath = "//input[@placeholder='Enter your address']")
+    @FindBy(xpath = "//input[@class='ng-untouched ng-pristine ng-invalid pac-target-input']")
     WebElement inputLocation;
 
     @FindBy(id = "make")
@@ -34,7 +33,7 @@ public class LetTheCarWorkPage extends BasePage {
     WebElement inputYear;
 
     @FindBy(id = "fuel")
-    WebElement inputFuel;
+    WebElement selectFuel;
 
     @FindBy(id = "seats")
     WebElement inputSeats;
@@ -46,35 +45,43 @@ public class LetTheCarWorkPage extends BasePage {
     WebElement inputRegistrationNumber;
 
     @FindBy(id = "price")
-    WebElement inputPrice;
+    WebElement inputPricePerDay;
 
     @FindBy(id = "about")
-    WebElement inputAbout;
+    WebElement textAreaAbout;
 
     @FindBy(id = "photos")
-    WebElement inputPhoto;
+    WebElement inputImage;
 
     @FindBy(xpath = "//button[text()='Submit']")
     WebElement btnSubmit;
 
-    @FindBy(xpath = "//mat-chip[@class='mat-chip mat-focus-indicator mat-primary mat-standard-chip mat-chip-with-trailing-icon']")
-    WebElement photoUploadConfirmation;
+    private void typeFuel(Fuel fuel){
+        selectFuel.click();
+        driver.findElement(By.xpath(fuel.getLocator())).click();
+    }
+
+    public void typeImage(){
+        inputImage.sendKeys(new File(carPhotoRandomizer()).getAbsolutePath());
+    }
 
     public void typeCarForm(Car car){
-        clickWait(inputLocation, 3);
+        clickWait(inputLocation, 5);
         inputLocation.sendKeys(car.getCity());
         inputManufacture.sendKeys(car.getManufacture());
         inputModel.sendKeys(car.getModel());
-        inputYear.sendKeys(Integer.toString(car.getYear()));
-        inputFuel.sendKeys(car.getFuel());
-        inputSeats.sendKeys(Integer.toString(car.getSeats()));
+        inputYear.sendKeys(car.getYear());
+        typeFuel(car.getFuel());
+        inputSeats.sendKeys(car.getSeats() + "");
         inputCarClass.sendKeys(car.getCarClass());
-        inputRegistrationNumber.sendKeys(car.getRegistrationNumber());
-        inputPrice.sendKeys(Double.toString(car.getPrice()));
-        inputAbout.sendKeys(car.getAbout());
-        File photo = new File(car.getPhoto());
-        inputPhoto.sendKeys(photo.getAbsolutePath());
-        clickWait(photoUploadConfirmation, 10);
+        inputRegistrationNumber.sendKeys(car.getSerialNumber());
+        inputPricePerDay.sendKeys(Double.toString(car.getPricePerDay()));
+        textAreaAbout.sendKeys(car.getAbout());
+    }
+
+    private static String carPhotoRandomizer() {
+        int carNumber = new Random().nextInt((10 - 1) + 1) + 1;
+        return "src/test/resources/car_images/car-" + carNumber+".png";
     }
 
     public void activateAndClickBtnSubmit(){
