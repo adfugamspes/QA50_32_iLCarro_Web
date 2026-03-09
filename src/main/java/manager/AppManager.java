@@ -44,7 +44,7 @@ public class AppManager {
         driver = new EventFiringDecorator<>(webDriverListener).decorate(driver);
     }
 
-    @AfterMethod(enabled = false)
+    @AfterMethod(enabled = true)
     public void tearDown() {
         logger.info("Stop testing " + LocalDate.now() + " : " + LocalTime.now());
         if(driver != null)
