@@ -21,6 +21,7 @@ dependencies {
     implementation 'net.datafaker:datafaker:2.5.2'
     implementation 'ch.qos.logback:logback-classic:1.5.18'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation 'org.apache-extras.beanshell:bsh:2.0b6'
 
 }
 
@@ -41,12 +42,6 @@ task smoke_tests(type: Test) {
 task regression_tests(type: Test){
     useTestNG(){
         suites 'src/test/resources/regression_tests.xml'
-    }
-}
-
-task regression_header_tests(type: Test){
-    useTestNG(){
-        suites 'src/test/resources/regression_header_tests.xml'
     }
 }
 

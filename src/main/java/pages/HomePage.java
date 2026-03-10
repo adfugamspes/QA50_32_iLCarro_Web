@@ -25,6 +25,7 @@ public class HomePage extends BasePage {
     public HomePage (WebDriver driver) {
         setDriver(driver);
         driver.get(getProperty("base.properties", "baseUrl"));
+//        driver.get("https://ilcarro.web.app/search");
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
 
@@ -112,7 +113,7 @@ public class HomePage extends BasePage {
     }
 
     public void clickBtnYalla_WithClickWait(){
-        clickWait(btnYalla, 3);
+        clickWait(btnYalla, 5);
     }
 
     private void typeCalendar(LocalDate date){

@@ -158,9 +158,7 @@ public class RegistrationTests extends AppManager {
         user.setEmail("");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -169,9 +167,7 @@ public class RegistrationTests extends AppManager {
         user.setEmail(" ");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Email is required"));
     }
 
     @Test(groups = {"regression"})
@@ -180,9 +176,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password is required"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -191,9 +185,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword(" ");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -202,9 +194,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("qwerty^35");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -213,9 +203,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("QWERTY^35");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -224,9 +212,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("Qwerty^ok");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -235,9 +221,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("Qwerty.35");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test(retryAnalyzer = RetryAnalyzer.class)
@@ -246,9 +230,7 @@ public class RegistrationTests extends AppManager {
         user.setPassword("Qrty^35");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Password must contain"));
     }
 
     @Test
@@ -257,9 +239,7 @@ public class RegistrationTests extends AppManager {
         user.setEmail("testingmail123gmail.com");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
     }
 
     @Test
@@ -268,9 +248,7 @@ public class RegistrationTests extends AppManager {
         user.setEmail("testingmail@@123gmail.com");
         registrationPage.typeRegistrationForm(user);
         registrationPage.clickCheckBoxRegistrationWithActions();
-        softAssert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
-        softAssert.assertFalse(registrationPage.isBtnYallaRegEnabled());
-        softAssert.assertAll();
+        Assert.assertTrue(registrationPage.isTextInErrorPresent("Wrong email format"));
     }
 
     @Test

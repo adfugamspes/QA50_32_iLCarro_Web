@@ -68,8 +68,11 @@ public class LetTheCarWorkPage extends BasePage {
     public void typeCarForm(Car car){
         clickWait(inputLocation, 5);
         inputLocation.sendKeys(car.getCity());
+        clickWait(inputManufacture, 5);
         inputManufacture.sendKeys(car.getManufacture());
+        clickWait(inputModel, 5);
         inputModel.sendKeys(car.getModel());
+        clickWait(inputYear, 5);
         inputYear.sendKeys(car.getYear());
         typeFuel(car.getFuel());
         inputSeats.sendKeys(car.getSeats() + "");

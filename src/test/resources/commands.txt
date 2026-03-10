@@ -1,0 +1,2 @@
+.\gradlew clean smoke_tests
+.\gradlew clean regression_tests

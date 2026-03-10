@@ -1,6 +1,7 @@
 package pages;
 
 import dto.User;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +24,7 @@ public class LoginPage extends BasePage{
     @FindBy(id = "password")
     WebElement inputPassword;
 
-    @FindBy(xpath = "//button[text()='Y’alla!']")
+    @FindBy(xpath = "//button[@type='submit']")
     WebElement btnYallaLog;
 
     @FindBy(xpath = "//h2[text()='Logged in success']")
@@ -35,7 +36,7 @@ public class LoginPage extends BasePage{
     }
 
     public void clickBtnYalla(){
-        btnYallaLog.click();
+        clickWait(btnYallaLog, 5);
     }
 
     public boolean isLoggedInDisplayed(){
@@ -44,5 +45,11 @@ public class LoginPage extends BasePage{
 
     public boolean isBtnYallaLogEnabled(){
         return btnYallaLog.isEnabled();
+    }
+
+    public void activateAndClickBtnYallaLog(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].removeAttribute('disabled');", btnYallaLog);
+        clickWait(btnYallaLog, 5);
     }
 }

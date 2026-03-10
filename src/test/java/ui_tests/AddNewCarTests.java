@@ -8,9 +8,7 @@ import org.testng.annotations.Test;
 import pages.*;
 import utils.CarFactory;
 import utils.enums.HeaderMenuItem;
-
 import static utils.UserFactory.*;
-
 import static pages.BasePage.clickButtonHeader;
 
 public class AddNewCarTests extends AppManager {
@@ -18,6 +16,7 @@ public class AddNewCarTests extends AppManager {
     HomePage homePage;
     LoginPage loginPage;
     LetTheCarWorkPage letTheCarWorkPage;
+    PopUpPage popUpPage;
 
     @BeforeMethod(alwaysRun = true)
     public void openLetTheCarWorkPage() {
@@ -25,7 +24,9 @@ public class AddNewCarTests extends AppManager {
         loginPage = clickButtonHeader(HeaderMenuItem.LOGIN);
         loginPage.typeLoginForm(positiveUserLogin());
         loginPage.clickBtnYalla();
-        new PopUpPage(getDriver()).clickBtnOk();
+        popUpPage = new PopUpPage(getDriver());
+        popUpPage.clickBtnOk();
+        letTheCarWorkPage = new LetTheCarWorkPage(getDriver());
         letTheCarWorkPage = clickButtonHeader(HeaderMenuItem.LET_THE_CAR_WORK);
         letTheCarWorkPage.pause(3);
     }

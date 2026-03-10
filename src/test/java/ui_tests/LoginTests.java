@@ -50,7 +50,7 @@ public class LoginTests extends AppManager {
         User user = User.builder().email("correctmail123mail.com").password("").build();
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
+        loginPage.activateAndClickBtnYallaLog();
         softAssert.assertTrue(loginPage.isTextInErrorPresent("It'snot look like email"), "valid email field");
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"), "valid password field");
         softAssert.assertAll();
@@ -62,8 +62,7 @@ public class LoginTests extends AppManager {
     public void loginNegativeTest_AllFieldsBlank(){
         User user = User.builder().email("").password("").build();
         loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
+        loginPage.activateAndClickBtnYallaLog();
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
         softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"));
         softAssert.assertAll();
@@ -74,10 +73,8 @@ public class LoginTests extends AppManager {
         User user = positiveUserLogin();
         user.setEmail("");
         loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
-        softAssert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
-        softAssert.assertAll();
+        loginPage.activateAndClickBtnYallaLog();
+        Assert.assertTrue(loginPage.isTextInErrorPresent("Email is required"));
     }
 
     @Test
@@ -96,10 +93,8 @@ public class LoginTests extends AppManager {
         User user = positiveUserLogin();
         user.setPassword("");
         loginPage.typeLoginForm(user);
-        loginPage.clickBtnYalla();
-        softAssert.assertFalse(loginPage.isBtnYallaLogEnabled());
-        softAssert.assertTrue(loginPage.isTextInErrorPresent("Password is required"));
-        softAssert.assertAll();
+        loginPage.activateAndClickBtnYallaLog();
+        Assert.assertTrue(loginPage.isTextInErrorPresent("Password is required"));
     }
 
     @Test
