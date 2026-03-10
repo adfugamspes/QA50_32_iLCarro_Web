@@ -1,5 +1,6 @@
 package pages;
 
+import manager.AppManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -19,7 +20,8 @@ import java.util.Locale;
 
 import static utils.PropertiesReader.*;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
+
     public HomePage (WebDriver driver) {
         setDriver(driver);
         driver.get(getProperty("base.properties", "baseUrl"));

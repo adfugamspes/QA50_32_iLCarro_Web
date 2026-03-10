@@ -21,13 +21,13 @@ public class LoginTests extends AppManager {
     LoginPage loginPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToLogInPage(){
         new HomePage(getDriver()).clickBtnLogIn();
         loginPage = new LoginPage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void loginPositiveTestWithUser (){
         User user = positiveUserLogin();
         LoginPage loginPage = new LoginPage(getDriver());
@@ -45,7 +45,7 @@ public class LoginTests extends AppManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("Logged in success"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_InvalidEmailAndBlankPassword(){
         User user = User.builder().email("correctmail123mail.com").password("").build();
         LoginPage loginPage = new LoginPage(getDriver());
@@ -58,7 +58,7 @@ public class LoginTests extends AppManager {
 
     //===========================HW7==============================
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_AllFieldsBlank(){
         User user = User.builder().email("").password("").build();
         loginPage.typeLoginForm(user);
@@ -69,7 +69,7 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_BlankEmail(){
         User user = positiveUserLogin();
         user.setEmail("");
@@ -91,7 +91,7 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_BlankPassword(){
         User user = positiveUserLogin();
         user.setPassword("");
@@ -113,7 +113,7 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_WrongEmail(){
         User user = positiveUserLogin();
         user.setEmail("testingmail@gmail.com");
@@ -124,7 +124,7 @@ public class LoginTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void loginNegativeTest_WrongPassword(){
         User user = positiveUserLogin();
         user.setPassword("Qwerty^123");

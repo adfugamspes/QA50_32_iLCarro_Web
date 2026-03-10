@@ -27,6 +27,26 @@ dependencies {
 test {
     useTestNG()
 }
+
 kotlin {
     jvmToolchain(17)
 }
+
+task smoke_tests(type: Test) {
+    useTestNG() {
+        suites 'src/test/resources/smoke_tests.xml'
+    }
+}
+
+task regression_tests(type: Test){
+    useTestNG(){
+        suites 'src/test/resources/regression_tests.xml'
+    }
+}
+
+task regression_header_tests(type: Test){
+    useTestNG(){
+        suites 'src/test/resources/regression_header_tests.xml'
+    }
+}
+

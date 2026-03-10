@@ -31,10 +31,6 @@ public class AppManager {
         return driver;
     }
 
-    public WebDriver setDriver(WebDriver wd){
-        return driver = wd;
-    }
-
     @BeforeMethod
     public void setup(){
         logger.info("Start testing " + LocalDate.now() + " : " + LocalTime.now());
@@ -51,3 +47,5 @@ public class AppManager {
             driver.quit();
     }
 }
+
+

@@ -26,13 +26,14 @@ import static utils.UserFactory.*;
 public class SearchCarTests extends AppManager {
     HomePage homePage;
     SoftAssert softAssert = new SoftAssert();
-    @BeforeMethod
+
+    @BeforeMethod(alwaysRun = true)
     public void openHomePage(){
         homePage = new HomePage(getDriver());
     }
 
     //===========================CW12==========================
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void searchCarPositiveTest(){
         String city = "Tel-Aviv";
         LocalDate startDate = LocalDate.of(2026, 4, 12);
@@ -62,7 +63,7 @@ public class SearchCarTests extends AppManager {
 
 
     //===============================HW10========================
-    @Test
+    @Test(groups = {"regression"})
     public void searchCarNegativeTest_SameDate_ValidateError(){
         String city = "Haifa";
         LocalDate startDate = LocalDate.of(2026, 4, 12);
@@ -72,7 +73,7 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("You can't book car for less than a day"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void searchCarNegativeTest_WrongDatesOrder_ValidateError(){
         String city = "Haifa";
         LocalDate startDate = LocalDate.of(2026, 4, 12);
@@ -82,7 +83,7 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("Second date must be after first date"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void searchCarNegativeTest_PastDates_ValidateError(){
         String city = "Haifa";
         LocalDate startDate = LocalDate.of(2025, 4, 12);
@@ -92,7 +93,7 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date before today"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void searchCarNegativeTest_LongPeriodSelection_ValidateError(){
         String city = "Haifa";
         LocalDate startDate = LocalDate.of(2026, 4, 12);
@@ -102,7 +103,7 @@ public class SearchCarTests extends AppManager {
         Assert.assertTrue(homePage.isTextInErrorPresent("You can't pick date after one year"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void searchCarNegativeTest_WrongMonth_ValidateError(){
         homePage.typeFindCarForm("Haifa", "13/02/2027 - 12/10/2027");
         homePage.clickBtnYalla();

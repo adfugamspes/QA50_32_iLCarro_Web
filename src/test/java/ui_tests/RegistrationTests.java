@@ -20,13 +20,13 @@ public class RegistrationTests extends AppManager {
     RegistrationPage registrationPage;
     SoftAssert softAssert = new SoftAssert();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToSignUpPage() {
         new HomePage(getDriver()).clickBtnSignUp();
         registrationPage = new RegistrationPage(getDriver());
     }
 
-    @Test
+    @Test(groups = {"smoke", "regression"})
     public void registrationPositiveTest_WithUser() {
         User user = User.builder().firstName("John").lastName("Smith").
                 email(registrationPage.randomEmailGenerator()).password("Password123!").build();
@@ -57,7 +57,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertTrue(new PopUpPage(getDriver()).isTextInPopUpMessagePresent("You are logged in success"));
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationNegativeTest_UserAlreadyExists() {
         User user = positiveUserRegistration();
         registrationPage.typeRegistrationForm(user);
@@ -106,7 +106,7 @@ public class RegistrationTests extends AppManager {
         Assert.assertFalse(registrationPage.isBtnYallaRegEnabled());
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationNegativeTest_BlankFirstName(){
         User user = positiveUserRegistration();
         user.setFirstName("");
@@ -129,7 +129,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationNegativeTest_BlankLastName(){
         User user = positiveUserRegistration();
         user.setLastName("");
@@ -152,7 +152,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationNegativeTest_BlankEmail(){
         User user = positiveUserRegistration();
         user.setEmail("");
@@ -174,7 +174,7 @@ public class RegistrationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression"})
     public void registrationNegativeTest_BlankPassword(){
         User user = positiveUserRegistration();
         user.setPassword("");

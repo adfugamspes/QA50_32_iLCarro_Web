@@ -14,7 +14,7 @@ public class NavigationTests extends AppManager {
     SoftAssert softAssert = new SoftAssert();
     HomePage homePage;
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void iconFacebookNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconFooter(FooterMenuItem.ICON_FACEBOOK, "Facebook"));
@@ -22,7 +22,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void iconTelegramNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconFooter(FooterMenuItem.ICON_TELEGRAM, "Telegram"));
@@ -30,7 +30,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void iconVKNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconFooter(FooterMenuItem.ICON_VK, "VK"));
@@ -38,7 +38,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void iconInstagramNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconFooter(FooterMenuItem.ICON_INSTAGRAM, "Instagram"));
@@ -46,7 +46,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void iconSlackNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconFooter(FooterMenuItem.ICON_SLACK, "Slack"));
@@ -54,7 +54,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "footer"})
     public void footerButtonsNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         homePage.clickLogoFooter();
@@ -72,7 +72,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "header"})
     public void btnSearchHeaderNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconHeader(HeaderMenuItem.SEARCH, "Search"));
@@ -80,7 +80,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "header"})
     public void btnLetTheCarWorkHeaderNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconHeader(HeaderMenuItem.LET_THE_CAR_WORK, "Let the car work!"));
@@ -88,7 +88,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "header"})
     public void btnTermsOfUseHeaderNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconHeader(HeaderMenuItem.TERMS_OF_USE, "Terms of use"));
@@ -96,7 +96,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "header"})
     public void btnRegistrationHeaderNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconHeader(HeaderMenuItem.SIGN_UP, "Registration"));
@@ -104,7 +104,7 @@ public class NavigationTests extends AppManager {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = {"regression", "header"})
     public void btnLoginHeaderNavigationPositiveTest() {
         homePage = new HomePage(getDriver());
         softAssert.assertTrue(homePage.clickIconHeader(HeaderMenuItem.LOGIN, "Login"));
